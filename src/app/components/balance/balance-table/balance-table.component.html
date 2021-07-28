@@ -1,0 +1,75 @@
+<div [@fadeInOutHeight]="balances && balances.length>0 ? 'in' : 'out'">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center" class="mx-3" fxLayout.xs="column"
+        fxLayoutAlign.xs="space-around stretch">
+        <mat-form-field appearance="outline" fxFlex="30">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+        </mat-form-field>
+
+        <mat-paginator [pageSizeOptions]="[10, 20, 50, 100, 200]" fxFlex="65" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+        <table mat-table [dataSource]="dataSource" matSort [matSortDisableClear]="true" class="mx-3" #table>
+            <ng-container matColumnDef="year">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Year</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.year }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="age">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Age </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.age }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="startBalance">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Start Balance </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.startBalance |currency:'AUD':'symbol-narrow':'0.0-0' }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="contributions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Contributions</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.contributions? (row.contributions
+                    |currency:'AUD':'symbol-narrow':'0.0-0'):"-"}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="earnings">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Earnings </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.earnings |currency:'AUD':'symbol-narrow':'0.0-0' }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fees">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Fees </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.fees |currency:'AUD':'symbol-narrow':'0.0-0'}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalArea">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Total Area </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.totalArea |currency:'AUD':'symbol-narrow':'0.0-0' }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="tax">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Tax </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.tax |currency:'AUD':'symbol-narrow':'0.0-0' }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="withdrawals">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Withdrawals </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.withdrawals>0?(row.withdrawals
+                    |currency:'AUD':'symbol-narrow':'0.0-0'):'-' }}</mat-cell>
+
+            </ng-container>
+
+            <ng-container matColumnDef="endBalance">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>End Balance </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.endBalance |currency:'AUD':'symbol-narrow':'0.0-0' }}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No results</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- balances: {{balances |json}} -->

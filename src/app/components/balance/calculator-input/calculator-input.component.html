@@ -1,0 +1,96 @@
+<form [formGroup]="form" novalidate class="m-4 p-4 mat-elevation-z8 ">
+    <div fxLayout="column" class="form-column">
+        <div fxLayout="row" fxLayoutAlign="space-around  center" fxLayout.xs="column"
+            fxLayoutAlign.xs="space-around stretch">
+            <div fxLayout="row wrap" fxLayoutAlign="space-around  center" fxLayoutGap="8px" fxFlex="67"
+                class="p-4 mat-elevation-z4">
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Start Balance</mat-label>
+                    <span matPrefix>$&nbsp;</span>
+                    <input matInput formControlName="startBalance" required (blur)="validateForm()" type="number">
+                    <mat-error *ngIf="displayMessage.startBalance"> {{ displayMessage.startBalance }} </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Salary</mat-label>
+                    <span matPrefix>$&nbsp;</span>
+                    <input matInput formControlName="salary" required (blur)="validateForm()" type="number">
+                    <mat-error *ngIf="displayMessage.salary"> {{ displayMessage.salary }} </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Contribution Rate</mat-label>
+                    <input matInput formControlName="contributionRate" required (blur)="validateForm()" type="number">
+                    <span matSuffix>&nbsp;%</span>
+                    <mat-error *ngIf="displayMessage.contributionRate"> {{ displayMessage.contributionRate }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Inflation Rate</mat-label>
+                    <input matInput formControlName="inflationRate" required (blur)="validateForm()" type="number">
+                    <span matSuffix>&nbsp;%</span>
+                    <mat-error *ngIf="displayMessage.inflationRate"> {{ displayMessage.inflationRate }} </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Earnings</mat-label>
+                    <input matInput formControlName="earnings" required (blur)="validateForm()" type="number">
+                    <span matSuffix>&nbsp;%</span>
+                    <mat-error *ngIf="displayMessage.earnings"> {{ displayMessage.earnings }} </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Fees</mat-label>
+                    <input matInput formControlName="fees" required (blur)="validateForm()" type="number">
+                    <span matSuffix>&nbsp;%</span>
+                    <mat-error *ngIf="displayMessage.fees"> {{ displayMessage.fees }} </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Tax</mat-label>
+                    <input matInput formControlName="tax" required (blur)="validateForm()" type="number">
+                    <span matSuffix>&nbsp;%</span>
+                    <mat-error *ngIf="displayMessage.tax"> {{ displayMessage.tax }} </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" fxFlex.xs="40">
+                    <mat-label>Withdrawal Rate</mat-label>
+                    <input matInput formControlName="withdrawalRate" required (blur)="validateForm()" type="number">
+                    <span matSuffix>&nbsp;%</span>
+                    <mat-error *ngIf="displayMessage.withdrawalRate"> {{ displayMessage.withdrawalRate }} </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-around  center" fxFlex="30" class="p-4 mat-elevation-z4">
+                <mat-form-field fxFlex="45" fxFlex.xs="40">
+                    <mat-label>From Year</mat-label>
+                    <input matInput formControlName="year" required (blur)="validateForm()" type="number">
+                    <mat-error *ngIf="displayMessage.year"> {{ displayMessage.year }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="45" fxFlex.xs="40">
+                    <mat-label>From Age</mat-label>
+                    <input matInput formControlName="age" required (blur)="validateForm()" type="number">
+                    <mat-error *ngIf="displayMessage.age"> {{ displayMessage.age }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="100" fxFlex.xs="40">
+                    <mat-label>Age when the Withdrawals begin and Contributions stop</mat-label>
+                    <input matInput formControlName="withdrawalsBeginAge" required (blur)="validateForm()"
+                        type="number">
+                    <mat-error *ngIf="displayMessage.withdrawalsBeginAge"> {{ displayMessage.withdrawalsBeginAge }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div [@fadeInOutHeight]="form.valid ? 'in' : 'out'">
+            <button mat-raised-button color="primary" (click)="calculateBalance()" class="mt-4"
+                [disabled]="!form.valid ">
+                Calculate Balance
+            </button>
+        </div>
+    </div>
+</form>

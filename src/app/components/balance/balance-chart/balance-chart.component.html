@@ -1,0 +1,6 @@
+<div [@fadeInOutHeight]="balances && balances.length>0 ? 'in' : 'out'" class="m-4">
+    <canvas *ngIf="balances && balances.length>0" baseChart [datasets]="lineChartData" [labels]="lineChartLabels"
+        [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" chartType="line"
+        [plugins]="lineChartPlugins">
+    </canvas>
+</div>
